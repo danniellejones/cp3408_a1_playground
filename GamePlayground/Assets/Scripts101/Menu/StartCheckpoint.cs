@@ -1,12 +1,16 @@
+using System;
 using UnityEngine;
 
-// Add this to an empty game object with a box collider at the start of the level, where the player spawns
+// Add this to an empty game object with a box collider at the start of the level, where it will spawn the player spawns
 public class StartCheckpoint : MonoBehaviour
 {
-    void OnTriggerEnter(Collider other)
+    public GameObject playerPrefab;
+    void Start()
     {
-        GameSystem.Instance.ResetTimer();
-        GameSystem.Instance.StartTimer();
-        Destroy(gameObject);
+            Instantiate(playerPrefab, transform.position, Quaternion.identity);
+
+            GameSystem.Instance.ResetTimer();
+            GameSystem.Instance.StartTimer();
+            Destroy(gameObject);
     }
 }
