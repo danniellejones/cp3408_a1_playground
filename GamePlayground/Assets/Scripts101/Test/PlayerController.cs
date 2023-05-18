@@ -3,7 +3,13 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float movementSpeed = 5f;
-    public float interactRange = 2f;
+    public float interactRange = 5f;
+    private InventorySystem inventory;
+
+    private void Start()
+    {
+        inventory = new InventorySystem();
+    }
 
     private void Update()
     {

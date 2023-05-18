@@ -3,14 +3,19 @@ using UnityEngine;
 
 public class ChestController : MonoBehaviour
 {
-    public int maxNumberOfEnemies;
-    public float spawnDuration = 3.0f;
+    public int maxNumberOfEnemies = 2;
+    public float spawnDuration = 20.0f;
     public GameObject enemyPrefab;
+    public AudioClip openChestAudio;
+    public AudioClip closeChestAudio;
+    public AudioClip trapAudio;
 
     private GameObject loot;
     private float spawnTimer;
     private int numberOfEnemies;
     private bool isLootClaimed;
+    private AudioSource audioSource;
+    private bool isTrapAudioPlaying;
 
     [SerializeField] public List<GameObject> lootPrefabs;
     [SerializeField] public Animator chestAnimator;
@@ -18,6 +23,7 @@ public class ChestController : MonoBehaviour
     private void Start()
     {
         spawnTimer = spawnDuration;
+        audioSource = GetComponent<AudioSource>();
     }
 
 
@@ -39,12 +45,26 @@ public class ChestController : MonoBehaviour
     {
         spawnTimer -= Time.deltaTime;
 
-        if (spawnTimer <= 0)
+        if (spawnTimer <= 0 && other.CompareTag("Player"))
         {
+            if (!chestAnimator.GetBool("activateChest"))
+            {
+                PlayAudioClip(openChestAudio);
+            }
+
             chestAnimator.SetBool("activateChest", true);
+
             if (loot == null && !isLootClaimed)
             {
                 SpawnLoot();
+            }
+        }
+        else
+        {
+            if (other.CompareTag("Player") && !isTrapAudioPlaying)
+            {
+                PlayLoopingAudioClip(trapAudio);
+                isTrapAudioPlaying = true;
             }
         }
     }
@@ -52,7 +72,13 @@ public class ChestController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            if (chestAnimator.GetBool("activateChest"))
+            {
+                PlayAudioClip(closeChestAudio);
+            }
+
             chestAnimator.SetBool("activateChest", false);
+
             if (loot != null && !isLootClaimed)
             {
                 GameObject lootToDestroy = loot;
@@ -60,6 +86,7 @@ public class ChestController : MonoBehaviour
                 DestroyGameObject(lootToDestroy);
             }
             spawnTimer = spawnDuration;
+            isTrapAudioPlaying = false;
         }
     }
 
@@ -100,4 +127,25 @@ public class ChestController : MonoBehaviour
         isLootClaimed = true;
         DestroyGameObject(claimedLoot);
     }
+
+    private void PlayAudioClip(AudioClip clip)
+    {
+        if (clip != null && audioSource != null)
+        {
+            audioSource.loop = false;
+            audioSource.clip = clip;
+            audioSource.Play();
+        }
+    }
+
+    private void PlayLoopingAudioClip(AudioClip clip)
+    {
+        if (clip != null && audioSource != null && !audioSource.isPlaying)
+        {
+            audioSource.clip = clip;
+            audioSource.loop = true;
+            audioSource.Play();
+        }
+    }
+
 }
