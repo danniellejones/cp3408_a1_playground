@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7642207845389377068}
   - component: {fileID: 5614410671974509286}
   - component: {fileID: 5192774692862516689}
+  - component: {fileID: 8800068757435964747}
   m_Layer: 0
   m_Name: Wand_Basic
   m_TagString: Loot
@@ -96,3 +97,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73134e60e814aa249a8a80a1fd8aa250, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &8800068757435964747
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6262986123301899059}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1765003, y: 0.9848948, z: 0.14545919}
+  m_Center: {x: 0.05251246, y: 0.17379937, z: -0.0019264668}

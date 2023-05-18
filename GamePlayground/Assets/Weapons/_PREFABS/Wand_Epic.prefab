@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 559980870778685113}
   - component: {fileID: 2315277830341522035}
   - component: {fileID: 2089275481602301653}
+  - component: {fileID: 2933653073266417131}
   m_Layer: 0
   m_Name: Wand_Epic
   m_TagString: Loot
@@ -96,3 +97,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73134e60e814aa249a8a80a1fd8aa250, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &2933653073266417131
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4260819330917749670}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1765003, y: 0.9848948, z: 0.14545919}
+  m_Center: {x: 0.05251246, y: 0.17379937, z: -0.0019264668}

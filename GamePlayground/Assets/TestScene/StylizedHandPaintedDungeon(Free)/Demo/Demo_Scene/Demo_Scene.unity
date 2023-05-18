@@ -1011,6 +1011,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3667761662860835853, guid: 10c71226e853cbb45aedf63c417c4834, type: 3}
+      propertyPath: onSpawnAudio
+      value: 
+      objectReference: {fileID: 8300000, guid: ba0961df78da0e24f85d0f050accfe1b, type: 3}
+    - target: {fileID: 3667761662860835853, guid: 10c71226e853cbb45aedf63c417c4834, type: 3}
       propertyPath: playerPrefab
       value: 
       objectReference: {fileID: 9197998163098852129, guid: ee8e876cba934ac46a652123ae84ab50, type: 3}
@@ -1021,6 +1025,10 @@ PrefabInstance:
     - target: {fileID: 4466170605666967005, guid: 10c71226e853cbb45aedf63c417c4834, type: 3}
       propertyPath: m_Name
       value: StartCheckpoint (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5461225064585792430, guid: 10c71226e853cbb45aedf63c417c4834, type: 3}
+      propertyPath: rolloffMode
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10c71226e853cbb45aedf63c417c4834, type: 3}
@@ -11573,13 +11581,17 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2115056882, guid: e195ee2d48389be46aa0f59a4cab6ee5, type: 3}
+      propertyPath: lootPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 3548874538517711366, guid: 6d2456ba08276d340a70ec1065d49e05, type: 3}
+    - target: {fileID: 2115056882, guid: e195ee2d48389be46aa0f59a4cab6ee5, type: 3}
       propertyPath: lootPrefabs.Array.data[1]
       value: 
       objectReference: {fileID: 1198998981114754527, guid: d0c32318984847e428ac1bce4ea19377, type: 3}
     - target: {fileID: 2115056882, guid: e195ee2d48389be46aa0f59a4cab6ee5, type: 3}
       propertyPath: lootPrefabs.Array.data[2]
       value: 
-      objectReference: {fileID: 2017372464273290904, guid: 0292f5558481790458c5adcc2b168185, type: 3}
+      objectReference: {fileID: 4651264813699394226, guid: 238d5f1b77b9e494180383a7f0480c61, type: 3}
     - target: {fileID: 1509452883521267212, guid: e195ee2d48389be46aa0f59a4cab6ee5, type: 3}
       propertyPath: m_Name
       value: Barrier

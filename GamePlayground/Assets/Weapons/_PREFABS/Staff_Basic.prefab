@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 119883165244929101}
   - component: {fileID: 2759895490306359431}
   - component: {fileID: -8886211950903165030}
+  - component: {fileID: -6946322758754382497}
   m_Layer: 0
   m_Name: Staff_Basic
   m_TagString: Loot
@@ -96,3 +97,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73134e60e814aa249a8a80a1fd8aa250, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &-6946322758754382497
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4417435450986619218}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.21917415, y: 2.2114878, z: 0.21917403}
+  m_Center: {x: 0.00000022351742, y: -0.22919038, z: 0.00000018253922}
