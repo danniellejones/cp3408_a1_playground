@@ -60,13 +60,17 @@ public class PlayerController : MonoBehaviour
                 if (lootItem != null && !lootItem.IsClaimed())
                 {
                     lootItem.SetClaimed();
-                    Debug.Log("Loot item picked up!");
+                    //Debug.Log("Loot item claimed.");
+                    Debug.Log(lootItem.ToString() + " claimed.");
 
-                    InventoryItem inventoryItem = collider.GetComponent<InventoryItem>();
-                    if (inventoryItem != null)
-                    {
-                        inventory.AddToInventory(inventoryItem);
-                    }
+                    //InventoryItem inventoryItem = collider.GetComponent<InventoryItem>();
+                    //if (inventoryItem != null)
+                    //{
+                        inventory.AddToInventory(collider.gameObject);
+                        //Debug.Log(inventoryItem.ToString() + " picked up.");
+                        Debug.Log(collider.gameObject.ToString() + " picked up.");
+                        //Debug.Log("Loot item picked up!");
+                    //}
                     break; // Stop checking other loot items
                 }
             }

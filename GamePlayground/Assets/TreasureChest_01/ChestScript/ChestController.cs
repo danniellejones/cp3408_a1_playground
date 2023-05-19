@@ -81,9 +81,11 @@ public class ChestController : MonoBehaviour
 
             if (loot != null && !isLootClaimed)
             {
-                GameObject lootToDestroy = loot;
-                loot = null;
-                DestroyGameObject(lootToDestroy);
+                loot.SetActive(false);
+                //GameObject lootToDestroy = loot;
+                //loot = null;
+                //DestroyGameObject(lootToDestroy);
+
             }
             spawnTimer = spawnDuration;
             isTrapAudioPlaying = false;
@@ -125,7 +127,8 @@ public class ChestController : MonoBehaviour
     private void OnLootClaimed(GameObject claimedLoot)
     {
         isLootClaimed = true;
-        DestroyGameObject(claimedLoot);
+        claimedLoot.SetActive(false);
+        //DestroyGameObject(claimedLoot);
     }
 
     private void PlayAudioClip(AudioClip clip)

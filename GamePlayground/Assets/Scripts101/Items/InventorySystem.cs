@@ -7,8 +7,8 @@ using TMPro;
 
 public class InventorySystem : MonoBehaviour
 {
-    [SerializeField]
-    private List<InventoryItem> inventory;
+    //[SerializeField]
+    public List<GameObject> inventory;
 
     // Display and navigate inventory items
     private int currentIndex = 0;
@@ -16,34 +16,36 @@ public class InventorySystem : MonoBehaviour
 
     private void Awake()
     {
-        inventory = new List<InventoryItem>();
+        inventory = new List<GameObject>();
     }
 
-    public void AddToInventory(InventoryItem lootItem)
+    public void AddToInventory(GameObject inventoryItem)
     {
-        InventoryItem itemComponent = lootItem.GetComponent<InventoryItem>();
-        if (itemComponent != null)
+        Debug.Log(inventoryItem.ToString() + "Just before add.");
+        //InventoryItem itemComponent = inventoryItem.GetComponent<InventoryItem>();
+        //if (itemComponent != null)
+        if (inventoryItem != null)
         {
-            inventory.Add(lootItem);
-            Debug.Log("Loot item added to inventory.");
-            lootItem.gameObject.SetActive(false); // Disable in scene
+            inventory.Add(inventoryItem);
+            Debug.Log(inventoryItem + "Loot item added to inventory.");
+            //lootItem.gameObject.SetActive(false); // Disable in scene
             UpdateInventoryText();
         }
     }
 
     public void UseItem()
     {
-        if (currentIndex >= 0 && currentIndex < inventory.Count)
-        {
-            InventoryItem item = inventory[currentIndex];
-            InventoryItem itemComponent = item.GetComponent<InventoryItem>();
-            if (itemComponent != null)
-            {
-                itemComponent.Use();
-                Debug.Log("Loot item being used.");
-                //RemoveItemFromInventory(item);
-            }
-        }
+        //if (currentIndex >= 0 && currentIndex < inventory.Count)
+        //{
+        //    InventoryItem item = inventory[currentIndex];
+        //    InventoryItem itemComponent = item.GetComponent<InventoryItem>();
+        //    if (itemComponent != null)
+        //    {
+        //        itemComponent.Use();
+        //        Debug.Log("Loot item being used.");
+        //        //RemoveItemFromInventory(item);
+        //    }
+        //}
     }
 
     // Change inventory item
@@ -72,7 +74,7 @@ public class InventorySystem : MonoBehaviour
         {
             if (inventory.Count > 0)
             {
-                string itemName = inventory[currentIndex].displayName;
+                string itemName = inventory[currentIndex].GetComponent<InventoryItem>().displayName;
                 inventoryText.text = itemName;
             }
         }
