@@ -8,7 +8,8 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        inventory = new InventorySystem();
+        //inventory = new InventorySystem();
+        inventory = FindObjectOfType<InventorySystem>();
     }
 
     private void Update()
@@ -25,6 +26,24 @@ public class PlayerController : MonoBehaviour
         {
             TryPickUpLoot();
         }
+        if (Input.GetKeyDown(KeyCode.Less))
+        {
+            //inventory;
+            inventory.ChangeItem(false);
+            Debug.Log("Change Item Back");
+        }
+        if (Input.GetKeyDown(KeyCode.KeypadEnter))
+        {
+            //TryPickUpLoot();
+            //inventory.UseItem();
+            Debug.Log("Use Item.");
+        }
+        if (Input.GetKeyDown(KeyCode.Greater))
+        {
+            //TryPickUpLoot();
+            inventory.ChangeItem(true);
+            Debug.Log("Change Item Forward.");
+        }
     }
 
     private void TryPickUpLoot()
@@ -39,6 +58,12 @@ public class PlayerController : MonoBehaviour
                 {
                     lootItem.SetClaimed();
                     Debug.Log("Loot item picked up!");
+
+                    InventoryItem inventoryItem = collider.GetComponent<InventoryItem>();
+                    if (inventoryItem != null)
+                    {
+                        inventory.AddToInventory(lootItem.gameObject);
+                    }
                     break; // Stop checking other loot items
                 }
             }

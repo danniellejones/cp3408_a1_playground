@@ -6,7 +6,12 @@ public class EndCheckpoint : MonoBehaviour
     public AudioClip victoryAudio;
 
     private AudioSource audioSource;
-    
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     void OnTriggerEnter(Collider other)
     {
         PlayAudioClip(victoryAudio);

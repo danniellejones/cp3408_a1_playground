@@ -10,12 +10,14 @@ public class StartCheckpoint : MonoBehaviour
     private AudioSource audioSource;
     void Start()
     {
-            Instantiate(playerPrefab, transform.position, Quaternion.identity);
-            PlayAudioClip(onSpawnAudio);
 
-            GameSystem.Instance.ResetTimer();
-            GameSystem.Instance.StartTimer();
-            Destroy(gameObject);
+        Instantiate(playerPrefab, transform.position, Quaternion.identity);
+        audioSource = GetComponent<AudioSource>();
+        PlayAudioClip(onSpawnAudio);
+
+        GameSystem.Instance.ResetTimer();
+        GameSystem.Instance.StartTimer();
+        Destroy(gameObject);
     }
 
     private void PlayAudioClip(AudioClip clip)
