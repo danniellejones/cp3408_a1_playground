@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -9,6 +10,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         inventory = FindObjectOfType<InventorySystem>();
+        //inventory.inventoryText = FindObjectOfType<TMP_Text>();
     }
 
     private void Update()
@@ -28,21 +30,21 @@ public class PlayerController : MonoBehaviour
         }
 
         // Go back an inventory item
-        if (Input.GetKeyDown(KeyCode.Less))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             inventory.ChangeItem(false);
             Debug.Log("Change Item Back.");
         }
 
         // Use inventory item
-        if (Input.GetKeyDown(KeyCode.KeypadEnter))
+        if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             inventory.UseItem();
             Debug.Log("Use Item.");
         }
 
         // Go forward an inventory item
-        if (Input.GetKeyDown(KeyCode.Greater))
+        if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             inventory.ChangeItem(true);
             Debug.Log("Change Item Forward.");

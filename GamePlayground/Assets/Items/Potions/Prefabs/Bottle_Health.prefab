@@ -9724,9 +9724,10 @@ GameObject:
   - component: {fileID: 4000010690109084}
   - component: {fileID: -2211426147381214391}
   - component: {fileID: 1417478952522784658}
+  - component: {fileID: -1290009062119189806}
   m_Layer: 0
   m_Name: Bottle_Health
-  m_TagString: Untagged
+  m_TagString: Loot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9774,5 +9775,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayName: Major Health Potion
   icon: {fileID: 0}
-  prefab: {fileID: 0}
   healthRestoreAmount: 15
+--- !u!65 &-1290009062119189806
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000012970591572}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}

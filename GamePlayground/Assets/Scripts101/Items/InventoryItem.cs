@@ -9,15 +9,15 @@ public class InventoryItem : MonoBehaviour
     // Common properities to all items
     public string displayName;
     public Sprite icon;
-    public GameObject prefab;
 
    public virtual void Use()
     {
-
+        // This will be implemented in the sub-classes Consumable Item and Weapon Item
     }
 
-    public override string ToString()
+    public virtual void RemoveFromInventory()
     {
-        return displayName;
+        InventorySystem inventorySystem = FindObjectOfType<InventorySystem>();
+        inventorySystem.RemoveItemFromInventory(this);
     }
 }

@@ -15,8 +15,8 @@ public class StartCheckpoint : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         PlayAudioClip(onSpawnAudio);
 
-        GameSystem.Instance.ResetTimer();
-        GameSystem.Instance.StartTimer();
+        //GameSystem.Instance.ResetTimer();
+        //GameSystem.Instance.StartTimer();
         Destroy(gameObject);
     }
 

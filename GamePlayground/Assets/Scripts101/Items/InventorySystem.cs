@@ -33,41 +33,46 @@ public class InventorySystem : MonoBehaviour
         }
     }
 
+    // Call on inventory item subclasses to use item selected
     public void UseItem()
     {
-        //if (currentIndex >= 0 && currentIndex < inventory.Count)
-        //{
-        //    InventoryItem item = inventory[currentIndex];
-        //    InventoryItem itemComponent = item.GetComponent<InventoryItem>();
-        //    if (itemComponent != null)
-        //    {
-        //        itemComponent.Use();
-        //        Debug.Log("Loot item being used.");
-        //        //RemoveItemFromInventory(item);
-        //    }
-        //}
+        if (currentIndex >= 0 && currentIndex < inventory.Count)
+        {
+            GameObject itemToUse = inventory[currentIndex];
+            InventoryItem itemComponent = itemToUse.GetComponent<InventoryItem>();
+            if (itemComponent != null)
+            {
+                itemComponent.Use();
+                Debug.Log("Loot item being used.");
+            }
+        }
     }
 
     // Change inventory item
     public void ChangeItem(bool next)
     {
-        if (next)
+        Debug.Log("Current Index Starts at: " + currentIndex);
+        if (inventory.Count > 0)  // Inventory is empty skip change
         {
-            currentIndex++;
-            if (currentIndex >= inventory.Count)
-                currentIndex = 0;
+            if (next)
+            {
+                currentIndex++;
+                if (currentIndex >= inventory.Count)
+                    currentIndex = 0;
+            }
+            else
+            {
+                currentIndex--;
+                if (currentIndex < 0)
+                    currentIndex = inventory.Count - 1;
+            }
+            Debug.Log("Current Index Changed to: " + currentIndex);
+            UpdateInventoryText();
         }
-        else
-        {
-            currentIndex--;
-            if (currentIndex < 0)
-                currentIndex = inventory.Count - 1;
-        }
-        UpdateInventoryText();
     }
 
 
-    // Display inventory
+    // Update display of inventory item in UI
     private void UpdateInventoryText()
     {
         if (inventoryText != null)
@@ -77,15 +82,55 @@ public class InventorySystem : MonoBehaviour
                 string itemName = inventory[currentIndex].GetComponent<InventoryItem>().displayName;
                 inventoryText.text = itemName;
             }
+            else
+            {
+                inventoryText.text = "Empty";
+            }
         }
     }
 
-
     public void RemoveItemFromInventory(InventoryItem itemToRemove)
     {
-        inventory.RemoveAt(currentIndex);
-        Destroy(itemToRemove);
-        UpdateInventoryText();
+        int indexOfItemToRemove = inventory.IndexOf(itemToRemove.gameObject);
+        if (indexOfItemToRemove >= 0)
+        {
+            inventory.RemoveAt(indexOfItemToRemove);
+            if (currentIndex >= inventory.Count)
+            {
+                currentIndex = Mathf.Max(0, inventory.Count - 1);
+            }
+            Destroy(itemToRemove.gameObject);
+            UpdateInventoryText();
+        }
 
+    }
+
+    public void EquipWeapon(WeaponItem weapon)
+    {
+        UnequipWeapon();
+        inventory.Remove(weapon.gameObject);
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            weapon.transform.SetParent(player.transform, false);  // Set weapon as child of player
+            weapon.gameObject.SetActive(true);
+        }
+        UpdateInventoryText();
+    }
+
+    public void UnequipWeapon()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        WeaponItem equippedWeapon = player.GetComponentInChildren<WeaponItem>();
+        if (equippedWeapon != null)
+        {
+            equippedWeapon.transform.SetParent(null, false);
+            //InventorySystem inventorySystem = FindObjectOfType<InventorySystem>();
+            //inventorySystem.AddToInventory(equippedWeapon.gameObject);
+            inventory.Add(equippedWeapon.gameObject);
+            equippedWeapon.gameObject.SetActive(false);
+            Debug.Log(equippedWeapon.ToString() + " unequipped.");
+            UpdateInventoryText();
+        }
     }
 }
