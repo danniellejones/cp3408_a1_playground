@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 838601129327186954}
   - component: {fileID: -6128832636267446731}
   - component: {fileID: -3853489471591591413}
+  - component: {fileID: -2810141684232882533}
   m_Layer: 0
   m_Name: Bow_Epic
   m_TagString: Loot
@@ -111,3 +112,19 @@ CapsuleCollider:
   m_Height: 1.3864355
   m_Direction: 1
   m_Center: {x: -0.089225985, y: -0.014714688, z: 0.01759023}
+--- !u!114 &-2810141684232882533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198998981114754527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fabb7d640c719545af81b31d30fc884, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayName: Bow Epic
+  icon: {fileID: 0}
+  prefab: {fileID: 0}
+  damage: 0

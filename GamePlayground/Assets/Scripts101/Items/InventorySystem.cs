@@ -8,7 +8,7 @@ using TMPro;
 public class InventorySystem : MonoBehaviour
 {
     [SerializeField]
-    private List<GameObject> inventory;
+    private List<InventoryItem> inventory;
 
     // Display and navigate inventory items
     private int currentIndex = 0;
@@ -16,34 +16,32 @@ public class InventorySystem : MonoBehaviour
 
     private void Awake()
     {
-        inventory = new List<GameObject>();
+        inventory = new List<InventoryItem>();
     }
 
-    public void AddToInventory(GameObject lootItem)
+    public void AddToInventory(InventoryItem lootItem)
     {
         InventoryItem itemComponent = lootItem.GetComponent<InventoryItem>();
         if (itemComponent != null)
         {
             inventory.Add(lootItem);
             Debug.Log("Loot item added to inventory.");
-            lootItem.SetActive(false); // Disable in scene
+            lootItem.gameObject.SetActive(false); // Disable in scene
             UpdateInventoryText();
         }
     }
 
-    public void UseItem(int index)
+    public void UseItem()
     {
         if (currentIndex >= 0 && currentIndex < inventory.Count)
         {
-            GameObject item = inventory[index];
+            InventoryItem item = inventory[currentIndex];
             InventoryItem itemComponent = item.GetComponent<InventoryItem>();
             if (itemComponent != null)
             {
                 itemComponent.Use();
                 Debug.Log("Loot item being used.");
-                inventory.RemoveAt(index);
-                Destroy(item);
-                UpdateInventoryText();
+                //RemoveItemFromInventory(item);
             }
         }
     }
@@ -63,6 +61,7 @@ public class InventorySystem : MonoBehaviour
             if (currentIndex < 0)
                 currentIndex = inventory.Count - 1;
         }
+        UpdateInventoryText();
     }
 
 
@@ -73,30 +72,18 @@ public class InventorySystem : MonoBehaviour
         {
             if (inventory.Count > 0)
             {
-                inventoryText.text = inventory[currentIndex].name;
-            }
-            else
-            {
-                inventoryText.text = "Inventory Empty";
+                string itemName = inventory[currentIndex].displayName;
+                inventoryText.text = itemName;
             }
         }
     }
 
-    //public void SetInventoryText(TMP_Text textComponent)
-    //{
-    //    inventoryText = textComponent;
-    //    UpdateInventoryText();
-    //}
 
+    public void RemoveItemFromInventory(InventoryItem itemToRemove)
+    {
+        inventory.RemoveAt(currentIndex);
+        Destroy(itemToRemove);
+        UpdateInventoryText();
 
-
-
-    //public void RemoveItemFromInventory(InventoryItem item)
-    //{
-    //    if(inventory.Contains(item))
-    //    {
-    //        inventory.Remove(item);
-    //    }
-    //}
-    //}
+    }
 }

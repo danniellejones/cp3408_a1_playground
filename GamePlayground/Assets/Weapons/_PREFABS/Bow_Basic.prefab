@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3044678432801254355}
   - component: {fileID: -247447351325170377}
   - component: {fileID: 3196266828592715733}
+  - component: {fileID: -2151565598947303557}
   m_Layer: 0
   m_Name: Bow_Basic
   m_TagString: Loot
@@ -110,3 +111,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.28, y: 3.12, z: 1.52}
   m_Center: {x: -0.089225985, y: -0.014714688, z: 0.01759023}
+--- !u!114 &-2151565598947303557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3548874538517711366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fabb7d640c719545af81b31d30fc884, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayName: Bow Basic
+  icon: {fileID: 0}
+  prefab: {fileID: 0}
+  damage: 0

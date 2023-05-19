@@ -15,4 +15,9 @@ public class InventoryItem : MonoBehaviour
     {
 
     }
+
+    public override string ToString()
+    {
+        return displayName;
+    }
 }
