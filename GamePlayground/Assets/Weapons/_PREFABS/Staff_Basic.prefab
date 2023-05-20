@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2759895490306359431}
   - component: {fileID: -8886211950903165030}
   - component: {fileID: -6946322758754382497}
+  - component: {fileID: -1161353463651627498}
   m_Layer: 0
   m_Name: Staff_Basic
   m_TagString: Loot
@@ -110,3 +111,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.21917415, y: 2.2114878, z: 0.21917403}
   m_Center: {x: 0.00000022351742, y: -0.22919038, z: 0.00000018253922}
+--- !u!114 &-1161353463651627498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4417435450986619218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fabb7d640c719545af81b31d30fc884, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayName: Staff Basic
+  icon: {fileID: 0}
+  damage: 10
