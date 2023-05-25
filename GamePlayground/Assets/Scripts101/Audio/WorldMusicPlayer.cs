@@ -8,7 +8,7 @@ using UnityEngine;
  * worldMusicPlayer = FindObjectOfType<WorldMusicPlayer>();  -- Add this to awake --
  * worldMusicPlayer.SetCharacterState(WorldMusicPlayer.CharacterState.Idle);  -- Add this to start and update --
  * worldMusicPlayer.SetCharacterState(WorldMusicPlayer.CharacterState.Attacking);  -- update on change --
- * wordlMusicPlayer.SetCharacterState(WorldMusicPlayer.CharacterState.InMenu);  -- update on change --
+ * worldMusicPlayer.SetCharacterState(WorldMusicPlayer.CharacterState.InMenu);  -- update on change --
  */
 public class WorldMusicPlayer : MonoBehaviour
 {
