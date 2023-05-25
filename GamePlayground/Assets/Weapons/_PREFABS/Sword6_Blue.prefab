@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2952809320871732110}
   m_Layer: 0
   m_Name: Sword6_Blue
-  m_TagString: Loot
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

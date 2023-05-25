@@ -11,6 +11,8 @@ public class ConsumableItem : InventoryItem
     public override void Use()
     {
         base.Use();
+        
+
         Debug.Log("Using Consumable Item.");
         // Perform health restore
 

@@ -5,19 +5,25 @@ public class TestPlayerController : MonoBehaviour
 {
     public float movementSpeed = 5f;
     public float interactRange = 5f;
+
+    public AudioClip inventoryPickUpAudio;
+    public AudioClip consumableAudioClip;
+    public AudioClip weaponAudioClip;
+    private AudioSource playerAudioSource;
+
     private InventorySystem inventory;
     WorldMusicPlayer worldMusicPlayer;
 
     private void Awake()
     {
         worldMusicPlayer = FindObjectOfType<WorldMusicPlayer>();
+        playerAudioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
     {
         inventory = FindObjectOfType<InventorySystem>();
-        //inventory.inventoryText = FindObjectOfType<TMP_Text>();
-        
+
         worldMusicPlayer.SetCharacterState(WorldMusicPlayer.CharacterState.Idle);
     }
 
@@ -47,6 +53,18 @@ public class TestPlayerController : MonoBehaviour
         // Use inventory item
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
+            InventoryItem currentItem = inventory.GetCurrentItem();
+            if (currentItem != null)
+            {
+                if (inventory.CompareTag("Weapon"))
+                {
+                    PlayAudioClip(weaponAudioClip, playerAudioSource);
+                }
+                else if (inventory.CompareTag("Loot"))
+                {
+                    PlayAudioClip(consumableAudioClip, playerAudioSource);
+                }
+            }
             inventory.UseItem();
             Debug.Log("Use Item.");
 
@@ -60,29 +78,33 @@ public class TestPlayerController : MonoBehaviour
         }
     }
 
+    private void PlayAudioClip(AudioClip clip, AudioSource audioSource)
+    {
+        if (clip != null && audioSource != null)
+        {
+            audioSource.loop = false;
+            audioSource.clip = clip;
+            audioSource.Play();
+        }
+    }
+
     private void TryPickUpLoot()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, interactRange);
         foreach (Collider collider in colliders)
         {
-            if (collider.CompareTag("Loot"))
+            if (collider.CompareTag("Loot") || collider.CompareTag("Weapon"))
             {
                 LootItem lootItem = collider.GetComponent<LootItem>();
                 if (lootItem != null && !lootItem.IsClaimed())
                 {
                     lootItem.SetClaimed();
-                    //Debug.Log("Loot item claimed.");
+                    PlayAudioClip(inventoryPickUpAudio, playerAudioSource);
                     Debug.Log(lootItem.ToString() + " claimed.");
 
-                    //InventoryItem inventoryItem = collider.GetComponent<InventoryItem>();
-                    //if (inventoryItem != null)
-                    //{
-                        inventory.AddToInventory(collider.gameObject);
-                        //Debug.Log(inventoryItem.ToString() + " picked up.");
-                        Debug.Log(collider.gameObject.ToString() + " picked up.");
-                        //Debug.Log("Loot item picked up!");
-                    //}
-                    break; // Stop checking other loot items
+                    inventory.AddToInventory(collider.gameObject);
+                    Debug.Log(collider.gameObject.ToString() + " picked up.");
+                    break;
                 }
             }
         }

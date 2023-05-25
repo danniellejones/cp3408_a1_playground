@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6140865680339577873}
   m_Layer: 0
   m_Name: Sword9_Purple
-  m_TagString: Loot
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

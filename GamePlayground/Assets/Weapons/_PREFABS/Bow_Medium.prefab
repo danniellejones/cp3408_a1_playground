@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5386383279476665418}
   m_Layer: 0
   m_Name: Bow_Medium
-  m_TagString: Loot
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -126,5 +126,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayName: Bow Medium
   icon: {fileID: 0}
-  prefab: {fileID: 0}
-  damage: 0
+  minDamage: 10
+  maxDamage: 20

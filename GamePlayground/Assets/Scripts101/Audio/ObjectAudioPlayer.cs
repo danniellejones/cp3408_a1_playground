@@ -9,13 +9,11 @@ public class ObjectAudioPlayer : MonoBehaviour
     public bool loopAudio = true;
     public AudioClip[] objectClips;
 
-    // Start is called before the first frame update
     void Start()
     {
         objectAudioSource = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!objectAudioSource.isPlaying)

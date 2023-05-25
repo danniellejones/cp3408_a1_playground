@@ -1,9 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-// Random Ambient Music Player based on states
+// Random Ambient Music Player based on states, the closer to the end checkpoint the ambient noises change
 /** Code to add to trigger states where required:
  * Add audio source object and add this script - make audio source 2D
  * Add audio clips for each state
@@ -27,7 +25,6 @@ public class AmbientMusicPlayer : MonoBehaviour
         ambientMusicAudioSource = GetComponent<AudioSource>();
         endCheckpoint = GameObject.FindGameObjectWithTag("End");
         player = GameObject.FindGameObjectWithTag("Player");
-
     }
 
     public enum LocationState
@@ -44,20 +41,8 @@ public class AmbientMusicPlayer : MonoBehaviour
     public AudioClip[] safeClips;
     public AudioClip defaultClip;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        Debug.Log("Start");
-        //distance = Vector3.Distance(player.transform.position, endCheckpoint.transform.position);
-        //CheckAndUpdateState();
-        //PlayRandomAudioClip();
-    }
-
-    // Update is called once per frame
     void Update()
     {
-
-        Debug.Log("Update");
         CheckAndUpdateState();
         if (!ambientMusicAudioSource.isPlaying && !isOnCoolDown)
         {
@@ -68,7 +53,7 @@ public class AmbientMusicPlayer : MonoBehaviour
         {
             startDistance = Vector3.Distance(player.transform.position, endCheckpoint.transform.position);
         }
-        Debug.Log("Ambient State is: " + locationState);
+        //Debug.Log("Ambient State is: " + locationState);
     }
 
     public AudioClip GetRandomClip()
@@ -132,7 +117,7 @@ public class AmbientMusicPlayer : MonoBehaviour
         PlayRandomAudioClip();
     }
 
-    float GetRandomCoolDownDuration()
+    private float GetRandomCoolDownDuration()
     {
         float maxCoolDown = ambientAudioCoolDown;
         float minCoolDown = 0f;
@@ -147,37 +132,32 @@ public class AmbientMusicPlayer : MonoBehaviour
     private void CheckAndUpdateState()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        Debug.Log("Player: " + player.ToString());
+        //Debug.Log("Player: " + player.ToString());
         endCheckpoint = GameObject.FindGameObjectWithTag("End");
-        Debug.Log("End point: " + endCheckpoint.ToString());
+        //Debug.Log("End point: " + endCheckpoint.ToString());
         distance = Vector3.Distance(player.transform.position, endCheckpoint.transform.position);
-        Debug.Log("Distance: " + distance.ToString());
-        Debug.Log("Start Distance: " + startDistance.ToString());
+        //Debug.Log("Distance: " + distance.ToString());
+        //Debug.Log("Start Distance: " + startDistance.ToString());
 
         if (endCheckpoint == null || player == null || distance == 0)
         {
-            Debug.Log("Returning");
             return;
         }
 
         if (!hasReachedEnd && endCheckpoint != null)
         {
-            //bool distance = Vector3.Distance(player.transform.position, endCheckpoint.transform.position) <= distanceThreshold;
-
 
             if (distance <= distanceThreshold)
             {
                 hasReachedEnd = true;
                 if (locationState != LocationState.Safe)
                     locationState = LocationState.Safe;
-                //SetNextAmbientState();
 
             }
             else if (distance < (startDistance / 2) && distance > distanceThreshold)
             {
                 if (locationState != LocationState.Danger)
                     locationState = LocationState.Danger;
-                //SetNextAmbientState();
             }
             else
             {
@@ -186,13 +166,4 @@ public class AmbientMusicPlayer : MonoBehaviour
             }
         }
     }
-    private void SetNextAmbientState()
-    {
-        int nextLocationState = (int)locationState + 1;
-        if (nextLocationState > (int)LocationState.Danger)
-            nextLocationState = (int)LocationState.Safe;
-
-        SetAmbientState((LocationState)nextLocationState);
-    }
-
 }

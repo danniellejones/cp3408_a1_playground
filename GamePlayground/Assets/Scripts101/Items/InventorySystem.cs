@@ -44,6 +44,7 @@ public class InventorySystem : MonoBehaviour
             {
                 itemComponent.Use();
                 Debug.Log("Loot item being used.");
+                UpdateInventoryText();
             }
         }
     }
@@ -67,8 +68,9 @@ public class InventorySystem : MonoBehaviour
                     currentIndex = inventory.Count - 1;
             }
             Debug.Log("Current Index Changed to: " + currentIndex);
-            UpdateInventoryText();
+           
         }
+        UpdateInventoryText();
     }
 
 
@@ -77,7 +79,7 @@ public class InventorySystem : MonoBehaviour
     {
         if (inventoryText != null)
         {
-            if (inventory.Count > 0)
+            if (inventory.Count > 0 && currentIndex < inventory.Count)
             {
                 string itemName = inventory[currentIndex].GetComponent<InventoryItem>().displayName;
                 inventoryText.text = itemName;
@@ -132,5 +134,14 @@ public class InventorySystem : MonoBehaviour
             Debug.Log(equippedWeapon.ToString() + " unequipped.");
             UpdateInventoryText();
         }
+    }
+
+    public InventoryItem GetCurrentItem()
+    {
+        if(currentIndex >= 0 && currentIndex < inventory.Count)
+        {
+            return inventory[currentIndex].GetComponent<InventoryItem>();
+        }
+        return null;
     }
 }
