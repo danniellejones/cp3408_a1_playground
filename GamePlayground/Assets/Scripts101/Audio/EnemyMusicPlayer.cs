@@ -4,6 +4,7 @@ using UnityEngine;
 
 // Random enemy Music Player based on states
 /** Code to add to trigger states where required:
+ * Add audio source onto enemy - make 3D spatial, lower distance to 5 or 10
  * EnemyMusicPlayer enemyMusicPlayer;  -- Inside the class --
  * enemyMusicPlayer = FindObjectOfType<EnemyMusicPlayer>();  -- Add this to awake --
  * enemyMusicPlayer.SetEnemyState(EnemyMusicPlayer.EnemyState.Idle);  -- Add this to start and update --
