@@ -5,7 +5,8 @@ using UnityEngine;
 // Attach to weapons
 public class WeaponItem : InventoryItem
 {
-    public int damage;
+    public int minDamage = 10;
+    public int maxDamage = 20;
 
     // Equip the weapon
     public override void Use()
@@ -16,5 +17,10 @@ public class WeaponItem : InventoryItem
 
         // Equip this weapon
         inventorySystem.EquipWeapon(this);
+    }
+
+   private int GenereateDamage()
+    {
+        return Random.Range(minDamage, maxDamage + 1);
     }
 }

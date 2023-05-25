@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 72015681297995597}
   - component: {fileID: 46706594787995997}
   - component: {fileID: 6387105436103057798}
+  - component: {fileID: 6598391512964142144}
   m_Layer: 0
   m_Name: Sword6_Red
   m_TagString: Loot
@@ -110,3 +111,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.30196956, y: 2.4027097, z: 0.28184322}
   m_Center: {x: -0.00015930831, y: 0.8402673, z: 0.00000032782555}
+--- !u!114 &6598391512964142144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2017372464273290904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fabb7d640c719545af81b31d30fc884, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayName: Blade of Blood
+  icon: {fileID: 0}
+  minDamage: 10
+  maxDamage: 20

@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fabb7d640c719545af81b31d30fc884, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayName: Staff Epic
+  displayName: Staff Of Lava
   icon: {fileID: 0}
-  damage: 20
+  minDamage: 18
+  maxDamage: 20

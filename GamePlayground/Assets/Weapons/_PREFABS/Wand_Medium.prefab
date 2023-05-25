@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4061459464606191194}
   - component: {fileID: -5082861100891811663}
   - component: {fileID: -3727491304262117099}
+  - component: {fileID: -2663985228074649535}
   m_Layer: 0
   m_Name: Wand_Medium
   m_TagString: Loot
@@ -110,3 +111,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.1765003, y: 0.9848948, z: 0.14545919}
   m_Center: {x: 0.05251246, y: 0.17379937, z: -0.0019264668}
+--- !u!114 &-2663985228074649535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2548421307829038991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fabb7d640c719545af81b31d30fc884, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayName: Earth Wand
+  icon: {fileID: 0}
+  damage: 0

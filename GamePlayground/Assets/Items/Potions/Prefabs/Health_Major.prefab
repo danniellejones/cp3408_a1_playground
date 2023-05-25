@@ -9726,7 +9726,7 @@ GameObject:
   - component: {fileID: 1417478952522784658}
   - component: {fileID: -1290009062119189806}
   m_Layer: 0
-  m_Name: Bottle_Health
+  m_Name: Health_Major
   m_TagString: Loot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
