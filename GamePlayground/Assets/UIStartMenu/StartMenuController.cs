@@ -11,10 +11,12 @@ public class StartMenuController : MonoBehaviour
     private AudioSource startMenuAudioSource;
     public AudioClip[] startMenuAudioClips;
     public AudioClip selectButtonAudioClip;
+    private GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameManager.instance;
         startMenuAudioSource = GetComponent<AudioSource>();
         startMenuAudioSource.loop = true;
         PlayStartMenuMusic(GetRandomAudioClip());
@@ -22,6 +24,14 @@ public class StartMenuController : MonoBehaviour
 
     public void StartGame()
     {
+        startMenuAudioSource.loop = false;
+        PlayStartMenuMusic(selectButtonAudioClip);
+        SceneManager.LoadScene(sceneToLoad);
+    }
+
+    public void StartNewGame()
+    {
+        gameManager.ResetLevelNumber();
         startMenuAudioSource.loop = false;
         PlayStartMenuMusic(selectButtonAudioClip);
         SceneManager.LoadScene(sceneToLoad);
