@@ -18,10 +18,16 @@ public class AmbientMusicPlayer : MonoBehaviour
     [SerializeField] public float distanceThreshold = 20f;
     private bool hasReachedEnd = false;
     private GameObject player;
+    private GameObject endCheckpoint;
+    private float distance = 0f;
+    private float startDistance = 0f;
 
     private void Awake()
     {
         ambientMusicAudioSource = GetComponent<AudioSource>();
+        endCheckpoint = GameObject.FindGameObjectWithTag("End");
+        player = GameObject.FindGameObjectWithTag("Player");
+
     }
 
     public enum LocationState
@@ -37,6 +43,33 @@ public class AmbientMusicPlayer : MonoBehaviour
     public AudioClip[] dangerClips;
     public AudioClip[] safeClips;
     public AudioClip defaultClip;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        Debug.Log("Start");
+        //distance = Vector3.Distance(player.transform.position, endCheckpoint.transform.position);
+        //CheckAndUpdateState();
+        //PlayRandomAudioClip();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+        Debug.Log("Update");
+        CheckAndUpdateState();
+        if (!ambientMusicAudioSource.isPlaying && !isOnCoolDown)
+        {
+            isPlaying = false;
+            StartCoroutine(PlayRandomAudioClipwithCoolDown());
+        }
+        if (startDistance == 0)
+        {
+            startDistance = Vector3.Distance(player.transform.position, endCheckpoint.transform.position);
+        }
+        Debug.Log("Ambient State is: " + locationState);
+    }
 
     public AudioClip GetRandomClip()
     {
@@ -63,23 +96,6 @@ public class AmbientMusicPlayer : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        PlayRandomAudioClip();
-        player = GameObject.FindGameObjectWithTag("Player");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (!ambientMusicAudioSource.isPlaying && !isOnCoolDown)
-        {
-            isPlaying = false;
-            StartCoroutine(PlayRandomAudioClipwithCoolDown());
-        }
-    }
-
     IEnumerator PlayRandomAudioClipwithCoolDown()
     {
         isOnCoolDown = true;
@@ -89,6 +105,7 @@ public class AmbientMusicPlayer : MonoBehaviour
         yield return new WaitForSeconds(coolDownDuration);
         isOnCoolDown = false;
     }
+
 
     public void PlayRandomAudioClip()
     {
@@ -127,15 +144,45 @@ public class AmbientMusicPlayer : MonoBehaviour
         return biasedValue;
     }
 
-    private void checkAndUpdateState()
+    private void CheckAndUpdateState()
     {
-        if (!hasReachedEnd)
+        player = GameObject.FindGameObjectWithTag("Player");
+        Debug.Log("Player: " + player.ToString());
+        endCheckpoint = GameObject.FindGameObjectWithTag("End");
+        Debug.Log("End point: " + endCheckpoint.ToString());
+        distance = Vector3.Distance(player.transform.position, endCheckpoint.transform.position);
+        Debug.Log("Distance: " + distance.ToString());
+        Debug.Log("Start Distance: " + startDistance.ToString());
+
+        if (endCheckpoint == null || player == null || distance == 0)
         {
-            GameObject endCheckpoint = GameObject.FindGameObjectWithTag("End");
-            if (Vector3.Distance(player.transform.position, endCheckpoint.transform.position) <= distanceThreshold)
+            Debug.Log("Returning");
+            return;
+        }
+
+        if (!hasReachedEnd && endCheckpoint != null)
+        {
+            //bool distance = Vector3.Distance(player.transform.position, endCheckpoint.transform.position) <= distanceThreshold;
+
+
+            if (distance <= distanceThreshold)
             {
                 hasReachedEnd = true;
-                SetNextAmbientState();
+                if (locationState != LocationState.Safe)
+                    locationState = LocationState.Safe;
+                //SetNextAmbientState();
+
+            }
+            else if (distance < (startDistance / 2) && distance > distanceThreshold)
+            {
+                if (locationState != LocationState.Danger)
+                    locationState = LocationState.Danger;
+                //SetNextAmbientState();
+            }
+            else
+            {
+                if (locationState != LocationState.Adventure)
+                    locationState = LocationState.Adventure;
             }
         }
     }

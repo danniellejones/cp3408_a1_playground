@@ -24,6 +24,7 @@ public class ChestController : MonoBehaviour
     {
         spawnTimer = spawnDuration;
         audioSource = GetComponent<AudioSource>();
+        //chestAnimator = GetComponent<Animator>();
     }
 
 
