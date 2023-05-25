@@ -22,8 +22,6 @@ public class InventorySystem : MonoBehaviour
     public void AddToInventory(GameObject inventoryItem)
     {
         Debug.Log(inventoryItem.ToString() + "Just before add.");
-        //InventoryItem itemComponent = inventoryItem.GetComponent<InventoryItem>();
-        //if (itemComponent != null)
         if (inventoryItem != null)
         {
             inventory.Add(inventoryItem);
@@ -127,8 +125,6 @@ public class InventorySystem : MonoBehaviour
         if (equippedWeapon != null)
         {
             equippedWeapon.transform.SetParent(null, false);
-            //InventorySystem inventorySystem = FindObjectOfType<InventorySystem>();
-            //inventorySystem.AddToInventory(equippedWeapon.gameObject);
             inventory.Add(equippedWeapon.gameObject);
             equippedWeapon.gameObject.SetActive(false);
             Debug.Log(equippedWeapon.ToString() + " unequipped.");

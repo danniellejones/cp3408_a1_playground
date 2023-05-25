@@ -56,11 +56,11 @@ public class TestPlayerController : MonoBehaviour
             InventoryItem currentItem = inventory.GetCurrentItem();
             if (currentItem != null)
             {
-                if (inventory.CompareTag("Weapon"))
+                if (currentItem.CompareTag("Weapon"))
                 {
                     PlayAudioClip(weaponAudioClip, playerAudioSource);
                 }
-                else if (inventory.CompareTag("Loot"))
+                else if (currentItem.CompareTag("Loot"))
                 {
                     PlayAudioClip(consumableAudioClip, playerAudioSource);
                 }
