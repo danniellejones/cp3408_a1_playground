@@ -24,7 +24,7 @@ public class TestPlayerController : MonoBehaviour
     {
         inventory = FindObjectOfType<InventorySystem>();
 
-        worldMusicPlayer.SetCharacterState(WorldMusicPlayer.CharacterState.Idle);
+        worldMusicPlayer.SetWorldState(WorldMusicPlayer.WorldState.Idle);
     }
 
     private void Update()

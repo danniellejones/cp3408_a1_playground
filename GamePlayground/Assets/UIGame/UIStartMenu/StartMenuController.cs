@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class StartMenuController : MonoBehaviour
@@ -18,8 +15,7 @@ public class StartMenuController : MonoBehaviour
     {
         gameManager = GameManager.instance;
         startMenuAudioSource = GetComponent<AudioSource>();
-        startMenuAudioSource.loop = true;
-        PlayStartMenuMusic(GetRandomAudioClip());
+        
     }
 
     public void StartGame()

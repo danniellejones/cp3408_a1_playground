@@ -6,9 +6,9 @@ using UnityEngine;
 /** Code to add to trigger states where required:
  * WorldMusicPlayer worldMusicPlayer;  -- Inside the class --
  * worldMusicPlayer = FindObjectOfType<WorldMusicPlayer>();  -- Add this to awake --
- * worldMusicPlayer.SetCharacterState(WorldMusicPlayer.CharacterState.Idle);  -- Add this to start and update --
- * worldMusicPlayer.SetCharacterState(WorldMusicPlayer.CharacterState.Attacking);  -- update on change --
- * worldMusicPlayer.SetCharacterState(WorldMusicPlayer.CharacterState.InMenu);  -- update on change --
+ * worldMusicPlayer.SetWorldState(WorldMusicPlayer.WorldState.Idle);  -- Add this to start and update --
+ * worldMusicPlayer.SetWorldState(WorldMusicPlayer.WorldState.Attacking);  -- update on change --
+ * worldMusicPlayer.SetWorldState(WorldMusicPlayer.WorldState.InMenu);  -- update on change --
  */
 public class WorldMusicPlayer : MonoBehaviour
 {
@@ -20,14 +20,14 @@ public class WorldMusicPlayer : MonoBehaviour
         worldMusicPlayerAudioSource = GetComponent<AudioSource>();
     }
 
-    public enum CharacterState
+    public enum WorldState
     {
         Idle,
         Attacking,
         InMenu
     }
 
-    public CharacterState characterState;
+    public WorldState characterState;
 
     public AudioClip[] idleClips;
     public AudioClip[] attackClips;
@@ -37,11 +37,11 @@ public class WorldMusicPlayer : MonoBehaviour
     {
         switch (characterState)
         {
-            case CharacterState.Idle:
+            case WorldState.Idle:
                 return idleClips[Random.Range(0, idleClips.Length)];
-            case CharacterState.Attacking:
+            case WorldState.Attacking:
                 return attackClips[Random.Range(0, attackClips.Length)];
-            case CharacterState.InMenu:
+            case WorldState.InMenu:
                 return inMenuClips[Random.Range(0, inMenuClips.Length)];
             default:
                 return null;
@@ -58,7 +58,7 @@ public class WorldMusicPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!worldMusicPlayerAudioSource.isPlaying)
+        if (!worldMusicPlayerAudioSource.isPlaying)
         {
             isPlaying = false;
             PlayRandomAudioClip();
@@ -71,16 +71,16 @@ public class WorldMusicPlayer : MonoBehaviour
 
         AudioClip clip = GetRandomClip();
 
-        if(clip != null)
+        if (clip != null)
         {
             worldMusicPlayerAudioSource.clip = clip;
             worldMusicPlayerAudioSource.Play();
         }
     }
 
-   public void SetCharacterState(CharacterState newCharacterState)
+    public void SetWorldState(WorldState newWorldState)
     {
-        characterState = newCharacterState;
+        characterState = newWorldState;
 
         if (isPlaying)
         {
@@ -89,6 +89,4 @@ public class WorldMusicPlayer : MonoBehaviour
         }
         PlayRandomAudioClip();
     }
-
-
 }

@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4407826164391908194
 Transform:
   m_ObjectHideFlags: 0
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38ab52ff3cc34c249b92292320b4ebac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceThreshold: 2
+  distanceThreshold: 3
   locationState: 0
   adventureClips:
   - {fileID: 8300000, guid: f74396619b7154fa5a38a1959cfa67ae, type: 3}
