@@ -124,6 +124,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: Blade of Blood
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 56cdb01435272f64f923221450161d3b, type: 3}
   minDamage: 10
   maxDamage: 20

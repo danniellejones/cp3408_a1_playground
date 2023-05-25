@@ -124,6 +124,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: Wood Wand
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 875e780675f3072448f9450848f52d21, type: 3}
   minDamage: 5
   maxDamage: 10
