@@ -6,41 +6,44 @@ using UnityEngine.SceneManagement;
 
 public class StartMenuController : MonoBehaviour
 {
-    [Header("Scene to Load")]
-    public string startLevel;
+    [Header("Start Menu")]
+    public string sceneToLoad;
     private AudioSource startMenuAudioSource;
     public AudioClip[] startMenuAudioClips;
+    public AudioClip selectButtonAudioClip;
 
     // Start is called before the first frame update
     void Start()
     {
         startMenuAudioSource = GetComponent<AudioSource>();
-        PlayStartMenuMusic();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        startMenuAudioSource.loop = true;
+        PlayStartMenuMusic(GetRandomAudioClip());
     }
 
     public void StartGame()
     {
-        SceneManager.LoadScene(startLevel);
+        startMenuAudioSource.loop = false;
+        PlayStartMenuMusic(selectButtonAudioClip);
+        SceneManager.LoadScene(sceneToLoad);
     }
 
-    public void ExitButton()
+    public void ExitGame()
     {
+        startMenuAudioSource.loop = false;
+        PlayStartMenuMusic(selectButtonAudioClip);
         Application.Quit();
     }
 
-    public void PlayStartMenuMusic()
+    private AudioClip GetRandomAudioClip()
+    {
+        return startMenuAudioClips[Random.Range(0, startMenuAudioClips.Length)];
+    }
+
+    public void PlayStartMenuMusic(AudioClip clip)
     {
         if (startMenuAudioClips == null)
             return;
-
-        startMenuAudioSource.loop = false;
-        AudioClip clip = startMenuAudioClips[Random.Range(0, startMenuAudioClips.Length)];
+        
         startMenuAudioSource.PlayOneShot(clip);
     }
 
