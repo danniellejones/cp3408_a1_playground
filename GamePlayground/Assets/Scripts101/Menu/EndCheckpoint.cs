@@ -4,8 +4,15 @@ using UnityEngine;
 public class EndCheckpoint : MonoBehaviour
 {
     public AudioClip victoryAudio;
-
     private AudioSource audioSource;
+    GameManager gameManager;
+
+    private void Awake()
+    {
+        //gameManager = GameManager.instance;
+        gameManager = FindObjectOfType<GameManager>();
+        Debug.Log(gameManager.ToString());
+    }
 
     private void Start()
     {
@@ -16,12 +23,11 @@ public class EndCheckpoint : MonoBehaviour
     {
         PlayAudioClip(victoryAudio);
         
-        if (other.GetComponent<Controller>() == null)
-            return;
+        //if (other.GetComponent<Controller>() == null)
+        //    return;
 
-        GameSystem.Instance.StopTimer();
-        GameSystem.Instance.FinishRun();
-        Destroy(gameObject);
+       gameManager.HandleLevelSuccess();
+        //Destroy(gameObject);
     }
 
     private void PlayAudioClip(AudioClip clip)

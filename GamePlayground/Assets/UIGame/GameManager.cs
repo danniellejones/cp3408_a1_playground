@@ -10,11 +10,11 @@ public class GameManager : MonoBehaviour
     private int numberOfKeys = 0;
 
     // UI Menus
-    private GameObject startMenuUI;
-    private GameObject endLevelUI;
-    private GameObject pauseMenuUI;
-    private GameObject deathMenuUI;
-    private GameObject gamePlayUI;
+    private Canvas startMenuUI;
+    private Canvas endLevelUI;
+    private Canvas pauseMenuUI;
+    private Canvas deathMenuUI;
+    private Canvas gamePlayUI;
 
     [Header("Scene")]
     public string sceneToLoad;
@@ -38,22 +38,59 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        
+        // Start playing Start Menu Audio
         gameManagerAudioSource = this.GetComponent<AudioSource>();
-
-
-        //startMenuUI = startMenuUI.GetComponent<GameObject>();
-        //startMenuUI.SetActive(true);
         Scene currentScene = SceneManager.GetActiveScene();
         string sceneName = currentScene.name;
         if (currentScene.name == "StartMenu")
         {
             PlayAudioClip(GetRandomAudioClip(startMenuAudioClips), true);
         }
+        // TODO: Remove this after testing
+        //gameManagerAudioSource = this.GetComponent<AudioSource>();
+        if (currentScene.name == "Demo_Scene")
+        {
+            gamePlayUI = GameObject.Find("UIGamePlay").GetComponent<Canvas>();
+            Debug.Log(gamePlayUI.ToString());
+            endLevelUI = GameObject.Find("UIEndLevelMenu").GetComponent<Canvas>();
+            Debug.Log(endLevelUI.ToString());
+            pauseMenuUI = GameObject.Find("UIPauseMenu").GetComponent<Canvas>();
+            Debug.Log(pauseMenuUI.ToString());
+            deathMenuUI = GameObject.Find("UIDeathMenu").GetComponent<Canvas>();
+            Debug.Log(deathMenuUI.ToString());
+
+            // Activate only the game play UI
+            gamePlayUI.gameObject.SetActive(true);
+            endLevelUI.gameObject.SetActive(false);
+            pauseMenuUI.gameObject.SetActive(false);
+            deathMenuUI.gameObject.SetActive(false);
+        }
     }
 
     private void Start()
     {
-        //gameManagerAudioSource = this.GetComponent<AudioSource>();
+        //Scene currentScene = SceneManager.GetActiveScene();
+        //string sceneName = currentScene.name;
+        //// TODO: Remove this after testing
+        ////gameManagerAudioSource = this.GetComponent<AudioSource>();
+        //if (currentScene.name == "Demo_Scene")
+        //{
+        //    gamePlayUI = GameObject.Find("UIGamePlay").GetComponent<Canvas>();
+        //    Debug.Log(gamePlayUI.ToString());
+        //    endLevelUI = GameObject.Find("UIEndLevelMenu").GetComponent<Canvas>();
+        //    Debug.Log(endLevelUI.ToString());
+        //    pauseMenuUI = GameObject.Find("UIPauseMenu").GetComponent<Canvas>();
+        //    Debug.Log(pauseMenuUI.ToString());
+        //    deathMenuUI = GameObject.Find("UIDeathMenu").GetComponent<Canvas>();
+        //    Debug.Log(deathMenuUI.ToString());
+
+        //    // Activate only the game play UI
+        //    gamePlayUI.gameObject.SetActive(true);
+        //    endLevelUI.gameObject.SetActive(false);
+        //    pauseMenuUI.gameObject.SetActive(false);
+        //    deathMenuUI.gameObject.SetActive(false);
+        //}
     }
 
     // On start menu if Play is selected continue saved from save
@@ -74,22 +111,28 @@ public class GameManager : MonoBehaviour
     // Start game
     public void StartGame()
     {
+        // Click menu item and load scene
         PlayAudioClip(selectButtonAudioClip, false);
         SceneManager.LoadScene(sceneToLoad);
 
-        // Assign UI instances to Game Manager
-        //startMenuUI = startMenuUI.GetComponent<GameObject>();
-        gamePlayUI = gamePlayUI.GetComponent<GameObject>();
-        endLevelUI = endLevelUI.GetComponent<GameObject>();
-        pauseMenuUI = pauseMenuUI.GetComponent<GameObject>();
-        deathMenuUI = deathMenuUI.GetComponent<GameObject>();
+        // Find audio
         worldMusicPlayer = FindObjectOfType<WorldMusicPlayer>();
 
+        // Assign UI instances to Game Manager
+        gamePlayUI = GameObject.Find("UIGamePlay").GetComponent<Canvas>();
+        Debug.Log(gamePlayUI.ToString());
+        endLevelUI = GameObject.Find("UIEndLevelMenu").GetComponent<Canvas>();
+        Debug.Log(endLevelUI.ToString());
+        pauseMenuUI = GameObject.Find("UIPauseMenu").GetComponent<Canvas>();
+        Debug.Log(pauseMenuUI.ToString());
+        deathMenuUI = GameObject.Find("UIDeathMenu").GetComponent<Canvas>();
+        Debug.Log(deathMenuUI.ToString());
+
         // Activate only the game play UI
-        gamePlayUI.SetActive(true);
-        endLevelUI.SetActive(false);
-        pauseMenuUI.SetActive(false);
-        deathMenuUI.SetActive(false);
+        gamePlayUI.gameObject.SetActive(true);
+        endLevelUI.gameObject.SetActive(false);
+        pauseMenuUI.gameObject.SetActive(false);
+        deathMenuUI.gameObject.SetActive(false);
     }
 
     // Increment level
@@ -99,10 +142,11 @@ public class GameManager : MonoBehaviour
     }
 
     // Display level complete UI
-    public void onSuccessfulLevelCompletion()
+    public void HandleLevelSuccess()
     {
-        gamePlayUI.SetActive(false);
-        endLevelUI.SetActive(true);
+        Debug.Log("Handle Level Success");
+        gamePlayUI.gameObject.SetActive(false);
+        endLevelUI.gameObject.SetActive(true);
         incrementLevel();
     }
 
@@ -110,18 +154,18 @@ public class GameManager : MonoBehaviour
     public void LoadNextLevel()
     {
         PlayAudioClip(selectButtonAudioClip, false);
-        endLevelUI.SetActive(false);
+        endLevelUI.gameObject.SetActive(false);
         SceneManager.LoadScene(sceneToLoad);
-        gamePlayUI.SetActive(true);
+        gamePlayUI.gameObject.SetActive(true);
     }
 
     // Select try again button from Death Menu UI
     public void RestartLevel()
     {
         PlayAudioClip(selectButtonAudioClip, false);
-        deathMenuUI.SetActive(false);
+        deathMenuUI.gameObject.SetActive(false);
         SceneManager.LoadScene(sceneToLoad);
-        gamePlayUI.SetActive(true);
+        gamePlayUI.gameObject.SetActive(true);
     }
 
     // Display Death Menu UI on player death
@@ -129,8 +173,8 @@ public class GameManager : MonoBehaviour
     {
         PlayAudioClip(onDeathAudioClip, false);
         levelNumber = 0;
-        gamePlayUI.SetActive(false);
-        deathMenuUI.SetActive(true);
+        gamePlayUI.gameObject.SetActive(false);
+        deathMenuUI.gameObject.SetActive(true);
     }
 
     // Save level and keys, then exit game
@@ -147,8 +191,8 @@ public class GameManager : MonoBehaviour
     {
         PlayAudioClip(selectButtonAudioClip, false);
         Time.timeScale = 0f;
-        gamePlayUI.SetActive(false);
-        pauseMenuUI.SetActive(true);
+        gamePlayUI.gameObject.SetActive(false);
+        pauseMenuUI.gameObject.SetActive(true);
         worldMusicPlayer.SetWorldState(WorldMusicPlayer.WorldState.InMenu);
     }
 
@@ -157,8 +201,8 @@ public class GameManager : MonoBehaviour
     {
         PlayAudioClip(selectButtonAudioClip, false);
         Time.timeScale = 1f;
-        pauseMenuUI.SetActive(false);
-        gamePlayUI.SetActive(true);
+        pauseMenuUI.gameObject.SetActive(false);
+        gamePlayUI.gameObject.SetActive(true);
         worldMusicPlayer.SetWorldState(WorldMusicPlayer.WorldState.Idle);
     }
 

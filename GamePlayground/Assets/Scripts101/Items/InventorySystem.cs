@@ -13,6 +13,7 @@ public class InventorySystem : MonoBehaviour
     // Display and navigate inventory items
     private int currentIndex = 0;
     public TMP_Text inventoryText;
+    public Image currentItemIcon;
 
     private void Awake()
     {
@@ -28,6 +29,7 @@ public class InventorySystem : MonoBehaviour
             Debug.Log(inventoryItem + "Loot item added to inventory.");
             //lootItem.gameObject.SetActive(false); // Disable in scene
             UpdateInventoryText();
+            UpdateItemIcon();
         }
     }
 
@@ -43,6 +45,7 @@ public class InventorySystem : MonoBehaviour
                 itemComponent.Use();
                 Debug.Log("Loot item being used.");
                 UpdateInventoryText();
+                UpdateItemIcon();
             }
         }
     }
@@ -69,6 +72,7 @@ public class InventorySystem : MonoBehaviour
            
         }
         UpdateInventoryText();
+        UpdateItemIcon();
     }
 
 
@@ -88,6 +92,22 @@ public class InventorySystem : MonoBehaviour
             }
         }
     }
+
+    private void UpdateItemIcon()
+    {
+        if (currentItemIcon != null)
+        {
+            if (inventory.Count > 0 && currentIndex < inventory.Count)
+            {
+                Sprite itemSprite = inventory[currentIndex].GetComponent<InventoryItem>().icon;
+                currentItemIcon.sprite = itemSprite;
+            }
+            else
+            {
+                currentItemIcon.sprite = null;
+            }
+    }
+        }
 
     public void RemoveItemFromInventory(InventoryItem itemToRemove)
     {
