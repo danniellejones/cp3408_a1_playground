@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
+// Script to use if works by collison on the floor tag with Grass, Water or Stone
 public class FootstepManager : MonoBehaviour
 {
     public List<AudioClip> grassSteps = new List<AudioClip>();
