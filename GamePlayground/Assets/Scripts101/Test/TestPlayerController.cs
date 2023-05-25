@@ -1,16 +1,24 @@
 using TMPro;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class TestPlayerController : MonoBehaviour
 {
     public float movementSpeed = 5f;
     public float interactRange = 5f;
     private InventorySystem inventory;
+    WorldMusicPlayer worldMusicPlayer;
+
+    private void Awake()
+    {
+        worldMusicPlayer = FindObjectOfType<WorldMusicPlayer>();
+    }
 
     private void Start()
     {
         inventory = FindObjectOfType<InventorySystem>();
         //inventory.inventoryText = FindObjectOfType<TMP_Text>();
+        
+        worldMusicPlayer.SetCharacterState(WorldMusicPlayer.CharacterState.Idle);
     }
 
     private void Update()
@@ -41,6 +49,7 @@ public class PlayerController : MonoBehaviour
         {
             inventory.UseItem();
             Debug.Log("Use Item.");
+
         }
 
         // Go forward an inventory item
