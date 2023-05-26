@@ -8,6 +8,7 @@ TagManager:
   - Loot
   - End
   - Weapon
+  - EquipHand
   layers:
   - Default
   - TransparentFX

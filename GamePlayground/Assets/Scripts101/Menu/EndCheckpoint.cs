@@ -6,11 +6,13 @@ public class EndCheckpoint : MonoBehaviour
     public AudioClip victoryAudio;
     private AudioSource audioSource;
     GameManager gameManager;
+    GameObject player;
 
     private void Awake()
     {
         //gameManager = GameManager.instance;
         gameManager = FindObjectOfType<GameManager>();
+        player = GameObject.FindGameObjectWithTag("Player");
         Debug.Log(gameManager.ToString());
     }
 
@@ -21,13 +23,11 @@ public class EndCheckpoint : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        PlayAudioClip(victoryAudio);
-        
-        //if (other.GetComponent<Controller>() == null)
-        //    return;
-
-       gameManager.HandleLevelSuccess();
-        //Destroy(gameObject);
+        if(other.CompareTag("Player"))
+        {
+            PlayAudioClip(victoryAudio);
+            gameManager.HandleLevelSuccess();
+        }
     }
 
     private void PlayAudioClip(AudioClip clip)

@@ -129,10 +129,10 @@ public class InventorySystem : MonoBehaviour
     {
         UnequipWeapon();
         inventory.Remove(weapon.gameObject);
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
+        GameObject equipHand = GameObject.FindGameObjectWithTag("EquipHand");
+        if (equipHand != null)
         {
-            weapon.transform.SetParent(player.transform, false);  // Set weapon as child of player
+            weapon.transform.SetParent(equipHand.transform, false);  // Set weapon as child of equipHand
             weapon.gameObject.SetActive(true);
         }
         UpdateInventoryText();
@@ -140,8 +140,8 @@ public class InventorySystem : MonoBehaviour
 
     public void UnequipWeapon()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        WeaponItem equippedWeapon = player.GetComponentInChildren<WeaponItem>();
+        GameObject equipHand = GameObject.FindGameObjectWithTag("EquipHand");
+        WeaponItem equippedWeapon = equipHand.GetComponentInChildren<WeaponItem>();
         if (equippedWeapon != null)
         {
             equippedWeapon.transform.SetParent(null, false);
